@@ -1,0 +1,191 @@
+<div class="new-info">
+        <h1 class="new-h"><div>Новый питомец</div></h1>
+        <div class="new-text">     
+                <form method="post" action="/Home/AddAnimal" id="new-animal-form">
+                        <div class="alert alert-danger alert-dismissible myhidden" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          Вы заполнили не все поля.
+                        </div>
+                        <h2>Информация о владельце</h2>
+                        <div class="form-group">
+                                <label for="place">Место содержания животного</label>
+                                 <select id="place">
+                                        <option value="shelter">Приют для животных</option>
+                                        <option value="private">Частная передержка</option>
+                                 </select>
+                        </div>
+                        <input id="inputShelterIid" type="hidden" class="nes" value="" name="shelterId">
+                        <div class="form-group" id="shelter-name">
+                                <label for="shelter">Название приюта</label>
+                                <select id="shelter">
+                                         @foreach(var shelter in ViewBag.Shelters)
+	                                 {
+                                             @if (shelter.Name != "Частная передержка"){
+                                                <option value="@shelter.Id">@shelter.Name</option>
+                                             }
+                                         }
+                                </select>
+                        </div>
+                        
+                        <div class="form-group hidden" id="div-name">
+                                <label for="Name">Ваше имя</label>
+                                <input type="text" id="Name" name="ownerName" class="nes" value="">
+                        </div>
+                        <div class="form-group">
+                                <label for="Phone">Номер телефона</label>
+                                <input type="text" id="phone" value="" class="form-control nes" name="phoneNumbers" data-format="+1 (ddd) ddd-dddd">
+                        </div>
+                        
+                        
+                        <h2>Информация о животном</h2>
+                        <div class="form-group">
+                                <label for="animal">Вид животного</label>
+                                <select id="animal" name="animalType">                                                
+                                        <option id="option-dog" value="Dog">Собака</option>
+                                        <option id="option-cat" value="Cat">Кошка</option>
+                                </select>
+                        </div>
+                        <div class="form-group" id="animal-name">
+                                <label for="an-name">Кличка животного</label>
+                                <input type="text" name="animalName" id="an-name" class="nes" value="">
+                        </div>
+                        
+                         <div class="form-group" id="animal-age">
+                                 <!--<label for="an-age">Возраст животного</label>
+                                 <div class="row">
+                                  <div class="col-xs-1">
+                                    
+                                    <input type="text" class="form-control" >
+                                  </div>
+                                  <div class="col-xs-1">
+                                    <input type="text" class="form-control" >
+                                  </div>
+                                  
+                                </div>-->
+                                <label for="an-age-year">Возраст животного</label>
+                                <div class="input-group">
+                                   <input type="number" class="nes" style="width:100px;" min="0" step="1" max="20" value="0" id="an-age-year" />
+                                   <span class="input-group-addon"> лет</span>
+                                   <input type="number" style="width:100px;" min="0" step="1" max="11" value="0" id="an-age-month" />
+                                   <span class="input-group-addon"> месяцев</span>
+                                   <input type="hidden" name="age" id="input-age" class="nes" value="">
+                                </div>
+                               
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="description">Описание</label>
+                                <textarea id="description" name="info" rows="7"  placeholder="Подробно опишите характер животного. Не забудьте упомянуть, стерелизовано ли животное, проставлены ли прививки."></textarea>
+                        </div>
+                        <div>
+                           <div class="form-group">
+                                       <label>Фотографии</label>
+                                       <br>
+                                       <span>Вы можете прикрепить не более 5 фотографий</span>
+                                       <input type="hidden" name="images" id="input-images" class="nes" value="">
+                               </div>
+                               <div id="my-awesome-dropzone" class="dropzone">                                               
+                               </div>
+                        </div>
+                        
+                       
+                        <button type="button" class="btn btn-default" id="submit-button" >Сохранить</button>
+                </form>
+        </div>
+</div>
+
+@section scripts
+{
+<script src="~/javascript/dropzone.js"></script>
+<script>
+        var mask_phone = function(i,base_mask, addition_mask){
+                console.log(base_mask);
+                if (i === 5){
+                        console.log('dasda');
+                        return 0;
+                }
+                else{                        
+                        var phone_val = $("#phone").val();
+                        $("#phone").mask(base_mask,{completed:function(){                             
+                                mask_phone(i+1,base_mask + addition_mask, addition_mask);
+                                return 0;
+                                
+                        }});  
+                        $("#phone").val(phone_val); 
+                }     
+        }
+        $(document).ready(function () {
+                require('jquery.maskedinput');
+                var images = [];
+                $('#my-awesome-dropzone').dropzone({
+                        url: '/Home/ImageUpload',
+                        dictDefaultMessage: "Перетащите изображения или нажмите для выбора",
+                        dictRemoveFile: " ",
+                        maxFiles: 5,
+                        acceptedFiles: "image/*",
+                        addRemoveLinks: true,
+                        init: function() {
+                                this.on("success", function(file, response) {
+                                        images.push(response.FileName);
+                                        $("#input-images").val(images.join("\n"));
+                                });
+                        }
+                });
+                $("#inputShelterIid").val($('#shelter option:selected').val());
+                var base_mask = "+7 (999) 999-9999";
+                var addition_mask = "?, +7 (999) 999-9999";
+                mask_phone(0,base_mask, addition_mask);
+                // $("#phone").mask(base_mask,{completed:function(){
+                //         current_mask = base_mask + addition_mask;
+                //         $("#phone").mask(current_mask);
+                // }});
+                $("#place").change(function() {
+                        $("#shelter-name").toggleClass("myhidden");
+                        if($(this).val() === "shelter"){
+                                $("#inputShelterIid").val($('#shelter option:selected').val());
+                                // $("#shelter-name").removeClass("hidden");
+                                // $("#div-name").addClass("hidden");
+                        }
+                        else{
+                                console.log($(this).val()); 
+                                $("#inputShelterIid").val('1');
+                                // $("#shelter-name").css("display","none");
+                                // $("#div-name").removeClass("hidden");
+                        }
+                  
+                });
+                $("#animal-age").change(function() {
+                        var age = parseInt($("#an-age-year").val())*12+parseInt($("#an-age-month").val());
+                        $("#input-age").val(age);
+                });
+                //     $("#shelter-name").removeClass("hidden");
+                // });   
+                $("#shelter").change(function() {
+                    $("#inputShelterIid").val($('#shelter option:selected').val());
+                });     
+                $("#submit-button").click(function(){
+                        $( "div.form-group" ).removeClass("has-error");
+                        var age = parseInt($("#an-age-year").val())*12+parseInt($("#an-age-month").val());
+                        $("#input-age").val(age);
+                        
+                        var t = false;      
+                        $( ".nes" ).each(function() {                                 
+                                                
+                                if ($(this).val() == ""){
+                                          $(this).closest( "div.form-group" ).addClass("has-error");
+                                          t = true;
+                                  }                               
+                        
+                        });
+                        
+                        if (t){
+                               $(".alert-danger").removeClass("myhidden") ; 
+                        }  
+                        else{
+                                $("#new-animal-form").submit();
+                        }  
+                        
+                })  ;
+        });
+</script>
+}        

@@ -1,0 +1,150 @@
+@import (reference) "mixins.less";
+
+@animal-card-gutter: 15px;
+@animal-card-width: (@container-lg - 30px - @animal-card-gutter*3)/4;
+@animal-card-padding: 20px;
+@animal-image-width: @animal-card-width - 2*@animal-card-padding;
+@fold-icon-size: 8px;
+@menu-item-hover-color: #ddd;
+@menu-item-checked-color: #B3E5FC;
+@menu-item-padding: 4px;
+
+
+.animals {
+	display: flex;
+
+	&__search-form-container {
+		width:100%;
+		background-color: #fff;
+		padding: 20px;
+	}
+
+	&__filter-column {
+		align-self: flex-start;
+		width: @animal-card-width;
+		margin-right: @animal-card-gutter;
+	}
+
+	&__filter {
+		background-color: @text-block-bg;
+		padding:20px;
+	}
+
+	&__filter-list {
+		list-style: none outside none;
+		padding-left:20px;
+	}
+
+	&__filter-link {
+		display: inline-block;
+		padding: @menu-item-padding;
+		transition: background-color 0.2s;
+		border-radius: @menu-item-padding;
+		cursor: pointer;
+		color:#1f1f1f;
+
+		&:hover {
+			background-color: @menu-item-hover-color;
+			text-decoration: none;
+		}
+
+		&_active {
+			background-color: @menu-item-checked-color;
+		}
+
+		&_disabled {
+			cursor: default;
+			color: #7f7f7f;
+		}
+	}
+
+	&__filter-menu {
+		position: relative;
+	}
+
+	&__filter-name::before {
+		cursor: pointer;
+		content: "-";
+		display: inline-block;
+		width: @fold-icon-size;
+		position: absolute;
+		left: -@fold-icon-size;
+		padding-top: @menu-item-padding;
+	}
+
+	&__filter-menu_folded &__filter-name::before{
+		content: "+";
+	}
+
+	&__filter-button {
+		.btn();
+		margin-top: 20px;
+		width: 100%;
+		border-radius: 0;
+		color: #FFF;
+		background-color: #009688;
+		border: 1px solid #009688;
+
+		&:hover {
+			color: #FFF;
+			background-color: #00796B;
+			border: 1px solid #00796B;
+			cursor: pointer;
+		}
+	}
+
+	&__filter-button-link {
+		color: #FFF;
+		text-decoration: none;
+
+		&:hover {
+			color: #FFF;
+			text-decoration: none;
+		}
+	}
+
+	&__display {
+		flex: 1; // растянуться на всю оставшуюся ширину
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: -@animal-card-gutter/2;
+	}
+
+	&__item {
+		.text-block();
+		padding: @animal-card-padding;
+		width: @animal-card-width;
+		margin: @animal-card-gutter/2;
+		cursor:pointer;
+
+		&:hover {
+			background-color: #80CBC4;
+			transition: background-color 0.5s ease;
+		}
+	}
+
+	&__item:hover &__name {
+		color:white;
+		transition: color 0.3s ease;
+	}
+
+	&__item-img {
+		.square(@animal-image-width);
+		border-radius: 50%;
+		background-position: center center;
+		background-size: cover;
+	}
+
+	&__name {
+		width: @animal-image-width;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+	}
+
+	&__shelter-name, &__age, &__phones{
+		color:@top-color;
+	}
+}

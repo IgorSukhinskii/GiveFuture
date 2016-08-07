@@ -1,0 +1,271 @@
+@using SweetHome.Utils;
+@using SweetHome.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section modal {
+<div id="animal-modal"> 
+    <aside>
+        <section>
+            <h3></h3>
+            <p><a></a></p>
+            <p></p>
+        </section>
+        <section class="gallery">
+            <ul class="gallery-aux">
+            </ul>
+        </section>
+        <section>
+            <p></p>
+        </section>
+        <footer>
+            <a></a>
+            <a></a>
+            <a></a>
+        </footer>
+        <span class="close"></span>
+    </aside>
+</div>
+}
+
+<div class="carousel-container">
+    <div class="carousel">
+        <ul class="bxslider">
+            <li><div class="img"
+                     style="background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');"
+                     title="1">
+                </div>
+            </li>
+            <li><div class="img"
+                     style="background-image: url('https://pp.vk.me/c625128/v625128472/34ed0/nC7to7uAsiI.jpg');"
+                     title="2">
+                </div>
+            </li>
+            <li><div class="img"
+                     style="background-image: url('https://pp.vk.me/c625320/v625320750/8042/x2tVza6bhnE.jpg');"
+                     title="2">
+                </div>
+            </li>
+            <li><div class="img"
+                     style="background-image: url('https://pp.vk.me/c625128/v625128472/34ebb/BxZNdgLrNWk.jpg');"
+                     title="2">
+                </div>
+            </li>
+            <li><div class="img"
+                     style="background-image: url('https://pp.vk.me/c628119/v628119790/4a0d/wxh9G0nyDiQ.jpg');"
+                     title="2">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="info-row">
+    <div class="volunteer-text">
+        <h1>О НАС</h1>
+        <p> SweetHome - это общая база животных из приютов г.Челябинска и Челябинской области. Наша задача заключается в том, чтобы помочь каждому одинокому питомцу найти свой дом. На сегодняшний день в Челябинске и Челябинской области находится _ приютов. В каждом из них нашли пристанище около 150 кошек и собак. Но это всего лишь небольшая часть существующего количества бездомных, брошенных животных, которые в отличие от человека, не могут позаботиться о себе сами. 
+Все животные, представленные на сайте, привиты и обработаны, некоторые стерелизованы. Они ничем не хуже дорогих, породистых щенят и котят, хозяева которых делают на своих питомцах бизнес. Они хотят чувствовать себя в безопасности, ощущать, что они нужны и любимы. 
+        <p>Cобаки, кошки и другие домашние животные, преданные человеком, чахнут на глазах. Это связано с неврозами, которые испытывают питомцы из-за нехватки внимания, общения, однообразной жизни. Но после того как бездомные животные обретают своих хозяев, они начинают хорошеть, набирают вес, становятся ухоженными, очаровательными домашними любимцами, которые хотят отблагодарить своих спасителей-хозяев нежностью и любовью.
+Каждый из нас хочет лучшей жизни. Наши беззащитные мохнатые собратья не исключение. Им нужна Ваша помощь. Именно Вы можете скрасить их жизнь. Они станут Вашим лучшим другом. А друзей покупать не нужно. Просто подарите им право быть счастливыми.   </p> </div>
+    <div class="news-block">
+        <h1>СРОЧНАЯ ТЕМА</h1>
+        <div class="news_msg">
+            <div class="img"
+                 style="background-image: url('https://pp.vk.me/c623428/v623428430/3f468/eMB8GxNmbGg.jpg');">
+            </div>
+            <div>
+                <h3>Здорового и красивого пса УСЫПЯТ! </h3>
+                <p>В клинику пришли люди и попросили усыпить их собаку. Причина:собака не нужна т.к. брали дети,они уехали от родителей.
+Уговорили подержать до пристройства,но на сколько хватит людей неизвестно, на охране в своем доме.
+Здорового,красивого, адекватного, жизнерадостного и просто отличного парня УСЫПЯТ! 
+<br>Тел. 89080505731</p>
+                <p class="readmore">ЧИТАТЬ ДАЛЕЕ</p>
+            </div>
+        </div>
+        <div>
+            <div class="img"
+                 style="background-image: url('https://pp.vk.me/c623231/v623231320/40da5/7oZSSQlnVzo.jpg');">
+            </div>
+            <div class="news_msg">
+                <h3>Два касавца ищут дом</h3>
+                <p>Выбросили двух котов после смерти хозяйки..квартиру продали, а их выгнали умирать на улицу... они спят на лавке и днями и ночами,под дождём ...очень лаковые парни..еду не ищут...не привыкли и не умеют,ждут пока покормят..местные коты их обижают... котики очень ласковые! жмутся к друг другу,чтобы согреться, может кому-то приглянуться котики! скоро холода они долго не протянут
+                <br>помогите найти им ДОМ!! 
+                <br>они доверчивые такие ко всем идут с надеждой 
+                <br>тел.8-952-529-6898</p>
+                <p class="readmore">ЧИТАТЬ ДАЛЕЕ</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lost-animals-row">
+    <div class="dogs">
+        <h1>Собаки ищут хозяев</h1>
+        <div class="image-list">
+            @foreach(ShelterAnimal dog in ViewBag.Dogs)
+		            {
+                        <a class="image-item" href="/Home/Animals?animal_id=@dog.Id">
+                            <div class="img-color">
+                                <h4><b>@dog.Name</b></h4>
+                                @if(dog.Shelter.Name == "Частная передержка"){
+                                    <h5>@dog.Shelter.Name</h5>
+                                 }
+                                 else{
+                                    <h5>Приют "@dog.Shelter.Name"</h5>
+                                }    
+                                 @if(dog.BirthDay != null)
+                                 {
+                                    <h5>@DateUtils.Age(dog.BirthDay.GetValueOrDefault(),DateTime.UtcNow)</h5>
+                                 }
+                                 else
+                                 {
+                                     var PhoneNumbers = dog.Phones.Select(phone => phone.PhoneNumber);
+                                     var ShelterPhoneNumbers = dog.Shelter.Phones.Select(phone => phone.PhoneNumber);
+                                     <h5>
+                                         @if (PhoneNumbers.Any()){
+                                             foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                								  @ph
+                							  }	
+                                         }
+                                         else
+                                         {
+                                            @if (ShelterPhoneNumbers.Any()){
+                                                 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                    								  @ph
+                    							  }	
+                                             }
+                                         }
+                                     </h5>
+                                 }
+                                 
+                            </div>
+                            <div class="img"
+                                 style="background-image: url('@dog.Images[0].Url');">
+                            </div>
+                        </a>
+                    }
+        </div>
+    </div>
+    <div class="cats">
+        <h1>Кошки ищут хозяев</h1>
+        <div class="image-list">
+            @foreach(ShelterAnimal cat in ViewBag.Cats)
+            {
+                <a class="image-item" href="/Home/Animals?animal_id=@cat.Id">
+                    <div class="img-color">
+                        <h4><b>@cat.Name</b></h4>                        
+                             @if(cat.Shelter.Name == "Частная передержка"){
+                                <h5>@cat.Shelter.Name</h5>
+                             }
+                             else{
+                                <h5>Приют "@cat.Shelter.Name"</h5>
+                            }                         
+                         @if(cat.BirthDay != null)
+                                 {
+                                    <h5>@DateUtils.Age(cat.BirthDay.GetValueOrDefault(),DateTime.UtcNow)</h5>
+                                 }
+                                 else
+                                 {
+                                     var PhoneNumbers = cat.Phones.Select(phone => phone.PhoneNumber);
+                                     var ShelterPhoneNumbers = cat.Shelter.Phones.Select(phone => phone.PhoneNumber);
+                                     <h5>
+                                         @if (PhoneNumbers.Any()){
+                                             foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                								  @ph
+                							  }	
+                                         }
+                                         else{
+                                            @if (ShelterPhoneNumbers.Any()){
+                                                 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                    								  @ph
+                    							  }	
+                                             }
+                                         }
+                                     </h5>
+                                 }
+                    </div>
+                    <div class="img"
+                         style="background-image: url('@cat.Images[0].Url');">
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<script>
+    (function () {
+        var getScrollBarWidth = function() {
+            var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
+                widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
+            $outer.remove();
+            return 100 - widthWithScroll;
+        };
+        var scroll_w = getScrollBarWidth();
+        $(".close").click(function(){
+            $(this).parents(".active").removeClass("active");
+            $("body").css("overflow-y", "auto");
+            $("body").css("padding-right", 0);
+        });
+        $("#animal-modal").click(function(e){
+            if (e.target === this){
+                window.history.pushState("", "Animals", "/Home/Animals");
+                $(this).removeClass("active");   
+                $("body").css("overflow-y", "auto");
+                $("body").css("padding-right", 0);
+            }
+        });
+        require('bxslider');
+        var modalSlider = undefined;
+        $('.carousel>.bxslider').bxSlider({
+            mode: 'horizontal',
+            captions: true,
+            pager:  false
+        });
+        $('.news-block>div').on('click', function() {
+            var header = $(this).find('div>h3').html();
+            var text = $(this).find('div>p').html();
+            var image = $(this).find('div.img').css('background-image');
+            var images = [image.substring(4, image.length - 1)];
+            // Заполним модал данными
+            $('#animal-modal>aside>section:nth-child(1)>h3')
+                .html(header);
+           $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
+                .html(text);
+            var photoElems = "";
+            for (var i = 0; i < images.length; i++) {
+                var active = "";
+                if (i==0) active = ' class="selected"';
+                photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + images[i] + '\');"></div></li>';
+            }
+            if (images.length > 1) {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+            } else {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html("");
+            }
+            $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
+            $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
+            modalSlider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
+                mode: 'horizontal',
+                // captions: true,
+                pager:  false,
+                onSlideBefore: function(e, o, i) {
+                    $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
+                    $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
+                }
+            });
+            $("#animal-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
+        });
+        var $news = $(".news_msg");
+        for (var i = 0; i < $news.length; i++){ 
+            if (($news[i].offsetHeight) >=  ($news[i].scrollHeight)) {
+                $($news[i]).children(".readmore").css("display","none");
+            }
+         }
+        
+    })();
+</script>
+}

@@ -1,0 +1,81 @@
+@import (reference) "mixins.less";
+
+// отступы для навбаров совпадают с их высотами
+body {
+    padding-bottom: @footer-height;
+    background-color: @body-bg;
+}
+
+.p{
+    color:@text-color;
+}
+
+.myhidden{
+	display: none !important;
+}
+
+// главная навигационная панель
+.navigation {
+    height: @navbar-height; 
+    width: 100%;
+    > div {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .container();
+        >a{
+            color:@top-color;
+            height: 100px;
+            line-height: 80px;
+            border-top: 6px @body-bg solid ;
+        }
+        > *:first-child {
+           font-size: 30px;
+           >div>img {
+               width: 270px;
+               height: 70px;
+               filter: FlipH;
+           }
+           margin-right: auto;
+        }
+        > .current{
+            color:#00897B;
+            border-top: 6px solid;
+        }
+        > *:not(:first-child) {
+            margin-left: 30px;
+            font-size: 18px;
+        }
+        > *:hover {
+            text-decoration: none;
+        }
+        
+    }
+    @media only screen and (max-width: @screen-xs-max) {
+        display: none;
+    }
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+// Main wrapping container
+.main-container {
+    .container();
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin-top: @vertical-layout-margin;
+        margin-bottom: @vertical-layout-margin;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

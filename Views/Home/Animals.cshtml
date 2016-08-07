@@ -1,0 +1,305 @@
+@model IEnumerable<SweetHome.Models.ShelterAnimal>
+@using SweetHome.Models;
+@using SweetHome.Utils;
+@using SweetHome;
+
+@{
+    ViewBag.Title = "Ищем хозяев";
+    string url = Url.Action("Animals", "Home", new {});
+    string dog_type = AnimalType.Dog.ToString();
+    string cat_type = AnimalType.Cat.ToString();
+    string blond_color = Color.Blond.ToString();
+    string multi_color = Color.Varicoloured.ToString();
+    string dark_color = Color.Dark.ToString();
+    string small_size = Size.Small.ToString();
+    string medium_size = Size.Medium.ToString();
+    string large_size = Size.Large.ToString();
+}
+
+@section modal {
+<div id="animal-modal" class="animal-modal"> 
+    <aside class="animal-modal__aside">
+        <section class="animal-modal__gallery">            
+        </section>
+         <section class="animal-modal__title-section">
+            <h3 class="animal-modal__animal-name"></h3>
+            <p class="animal-modal__place"><a class="animal-modal__place-link"></a></p>
+            <p class="animal-modal__phone"></p>
+            <ul class="animal-modal__gallery-aux">
+            </ul>
+
+            <section class="animal-modal__description">
+                <p class="animal-modal__description-text"></p>
+            </section>
+        </section>
+
+        <footer class="animal-modal__footer">
+            <a class="animal-modal__footer"></a>
+            <a class="animal-modal__footer"></a>
+            <a class="animal-modal__footer"></a>
+        </footer>
+        <span class="animal-modal__close"></span>
+    </aside>
+</div>
+}
+
+
+<div class="animals">
+    <div class="animals__filter-column">
+        <div class="animals__search-form-container col-sm-3 col-md-3 pull-right" id="searchForm">
+            <form class="animals__search-form navbar-form" role="search">
+                <div class="animals__search-form-input-group input-group">
+                    <input type="text" class="animals__search-form-input form-control" placeholder="Поиск" name="srch-term" id="srch-term">
+                    <div class="animals__search-form-input-group-btn input-group-btn">
+                        <button class="animals__search-form-input-group-button btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="animals__filter">
+            <ul class="animals__filter-list">
+                @{
+                    var allActive = ViewBag.All ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
+                }
+                <li class="animals__filter-item"><a class="@allActive" href="@url">Все</a></li>
+                <li class="animals__filter-item animals__filter-menu">
+                    <div class="animals__filter-name"><span class="animals__filter-link animals__filter-link_disabled">Приюты</span></div>
+                    <ul class="animals__filter-list">
+                        @foreach(var shelter in ViewBag.Shelters)
+    		            {
+                            var shelterActive = "animals__filter-link";
+                            if (ViewBag.ShelterId == shelter.Id)
+                            {
+                                shelterActive = "animals__filter-link animals__filter-link_active";
+                            }
+                            <li class="animals__filter-item"><a class="@shelterActive" href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
+                        }
+                    </ul>
+                </li>
+                <li class="animals__filter-item animals__filter-menu">
+                    @{
+                        var dogOnly = (ViewBag.Type == AnimalType.Dog &&
+                                       ViewBag.Size == null &&
+                                       ViewBag.AgeLess == null) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
+                        var dogYoung = (ViewBag.Type == AnimalType.Dog &&
+                                        ViewBag.AgeLess == 1) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
+                    }
+                    <div class="animals__filter-name">
+                        @if (ViewBag.ShelterId == 1)
+                            {
+                                <a class="animals__filter-link animals__filter-link_active" href="@url?shelter=1">Частная передержка</a>
+                            }
+                        else{
+                                <a class="animals__filter-link" href="@url?shelter=1">Частная передержка</a>
+                        }
+                    </div>
+                    <a class="@dogOnly" href="@url?type=@dog_type">Собаки</a>
+                    <ul class="animals__filter-list">
+                        <li class="animals__filter-item"><a class="@dogYoung" href="@url?type=@dog_type&age_less=1">Щенки</a></li>
+                    </ul>
+                </li>
+                <li class="animals__filter-item animals__filter-menu">
+                    @{
+                        var catOnly = (ViewBag.Type == AnimalType.Cat &&
+                                       ViewBag.Color == null &&
+                                       ViewBag.AgeLess == null) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
+                        var catYoung = (ViewBag.Type == AnimalType.Cat &&
+                                        ViewBag.AgeLess == 1) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
+                    }
+                    <a class=@catOnly href="@url?type=@cat_type">Кошки</a>
+                    <ul class="animals__filter-list">
+                        <li class="animals__filter-item"><a class="@catYoung" href="@url?type=@cat_type&age_less=1">Котята</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <button class="animals__filter-button"><a class="animals__filter-button-link" href="/Home/New">ДОБАВИТЬ ЗАПИСЬ</a></button>
+    </div>
+   
+    <div class="animals__display">
+        @foreach(var animal in Model)
+        {
+        var jsonAnimal = SweetHome.Utils.Json.SerializeObject<Shelter>(animal, (shelter => shelter.Animals));
+        <div class="animals__item" data-animal="@jsonAnimal" data-animal-id="@animal.Id">
+            <div class="animals__item-img" style="background-image: url('@animal.Images[0].Url');"></div>
+            <h3 class="animals__name">@animal.Name</h3>
+            @if(animal.Shelter != null)
+            {
+                @if(animal.Shelter.Name == "Частная передержка"){
+                    <p class="animals__shelter-name">@animal.Shelter.Name</p>
+                }
+                else{
+                    <p class="animals__shelter-name">Приют "@animal.Shelter.Name"</p>
+                }
+                 @if(animal.BirthDay != null)
+                     {
+                        <p class="animals__age">@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
+                     }
+                 else
+                     {
+                         @if (animal.Phones.Any())
+                         {
+                            <p class="animals__phones">
+                                @animal.Phones.PhonesList()
+                            </p>
+                         }
+                         else
+                         {
+                            @if (animal.Shelter.Phones.Any())
+                            {
+                                <p class="animals__phones">
+                                    @animal.Shelter.Phones.PhonesList()
+                                </p>
+                            }                          
+                        
+                         }
+                     }
+            }
+        </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+<script>
+    
+    function get_orientation(src){
+        var img = new Image();
+        img.src = src;
+        var width = img.width;
+        var height = img.height;
+        
+        if(width > height) {
+            return "animal-modal__gallery-photos-image_landscape";
+        } else {
+            return "animal-modal__gallery-photos-image_portrait";
+        }
+        
+    }
+    
+    
+    (function () {
+        var modalUtils = require('utils/modal');
+        var scroll_w = modalUtils.getScrollBarWidth();
+        var calculate_children_height = function(el) {
+            var children = $(el).children();
+            var height = 0;
+            for (var i = 0; i < children.length; i++)
+            {
+                height += children[i].clientHeight;
+            }
+            return height; 
+        };
+        $('.animals__filter-column').on(
+            'click',
+            '.animals__filter-name',
+            function(e){
+                var $this = $(this);
+                if (e.offsetX < 0) { // клик по псевдоэлементу
+                    $this.parent().children('ul').slideToggle(500);
+                    $this.parent().toggleClass("animals__filter-menu_folded");
+                }
+            }
+        );
+        $(".animal-modal__close").click(function(){
+            $(this).parents(".active").removeClass("active");
+            $("body").css("overflow-y", "auto");
+            $("body").css("padding-right", 0);
+        });
+        $("#animal-modal").click(function(e){
+            if (e.target === this){
+                window.history.pushState("", "Animals", "/Home/Animals");
+                $(this).removeClass("active");   
+                $("body").css("overflow-y", "auto");
+                $("body").css("padding-right", 0);
+            }
+        });
+        require('bxslider');
+        var slider = undefined;
+        $("#animal-modal").on("click", ".animal-modal__gallery-item", function(e){
+            var li = this;
+            var ul = li.parentNode;
+            var index = Array.prototype.indexOf.call(ul.children, li);
+            slider.goToSlide(index);
+        });
+        var img = require('utils/img');
+        $('[data-animal]').on('click', function() {
+            var animalData = $(this).data('animal');
+            console.log(animalData.Images);
+            // Заполним модал данными из animalData
+            $('.animal-modal__animal-name')
+                .html(animalData.Name);
+            if (animalData.Shelter.Name == "Частная передержка"){
+                $('.animal-modal__place')
+                .html(animalData.Shelter.Name);
+            }
+            else{
+                $('.animal-modal__place')
+                    .html("Живет в приюте <a class='animal-modal__place-link'>" + animalData.Shelter.Name + "</a>");
+            }
+            $('.animal-modal__place-link')
+                .attr("href","/Shelters/"+animalData.Shelter.URL);
+                   
+            if (animalData.PhoneNumbers.length != 0){
+                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
+                .html(animalData.PhoneNumbers);
+            }
+            else{
+                $('.animal-modal__phone')
+                .html(animalData.Shelter.PhoneNumbers);
+            }              
+          
+            $('.animal-modal__description-text')
+                .html(animalData.Info);
+            var phones = $('.animal-modal__phone').text().replace(/\s/g, '');
+            var end_phones = "";
+           
+            for (var i = 0; i < phones.length; i+=11) {
+                end_phones = end_phones + phones.substring(i,i+11).replace(/(\d{1})(\d{3})(\d{3})(\d{4})/, '$1-$2-$3-$4');
+                if (i<phones.length-11){
+                    end_phones += ", ";
+                }
+            }
+            $('.animal-modal__phone').text(end_phones);
+            var photoElems = "";
+            for (var i = 0; i < animalData.Images.length; i++) {
+                var active = '"';
+                if (i==0) active = ' selected" ';
+                photoElems += '<li class="animal-modal__gallery-photo' + active + '>' + '<div class="animal-modal__gallery-photos-image-container"><img class="'+ get_orientation(animalData.Images[i]) +'"  src="' + animalData.Images[i] + '"/></div></li>';
+            }
+            var galleryElems = "";
+            for (var i = 0; i < animalData.Images.length; i++) {
+                var active = '"';
+                if (i==0) active = ' selected" ';
+                galleryElems += '<li class="animal-modal__gallery-item' + active + '>' + img.div(animalData.Images[i]) + '</li>';
+            }
+            if (animalData.Images.length > 1) {
+                $('.animal-modal__gallery-aux').html(galleryElems);
+            } else {
+                $('.animal-modal__gallery-aux').html("");
+            }
+            $('.animal-modal__gallery>.bx-wrapper').remove();
+            $('.animal-modal__gallery').prepend('<ul class="animal-modal__bxslider">' + photoElems + '</ul>');
+            slider = $('.animal-modal__bxslider').bxSlider({
+                mode: 'horizontal',
+                pager:  false,
+                onSlideBefore: function(e, o, i) {
+                    $(".animal-modal__gallery-item").removeClass("selected");
+                    $(".animal-modal__gallery-item:nth-child("+ (i + 1) +")").addClass("selected");
+                }
+            });
+            window.history.pushState(animalData, animalData.Name, "/Home/Animals?animal_id=" + animalData.Id);
+            $("#animal-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
+        });
+        @if (ViewBag.AnimalId != null)
+        {
+            <text>
+        $('[data-animal-id="@ViewBag.AnimalId"]').click();
+            </text>
+        }
+    })();
+</script>
+}

@@ -1,0 +1,23 @@
+{
+  "name": "sweethome",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "jquery": "2.2.3",
+    "bxslider-4": "~4.2.3",
+    "almond": "~0.3.2"
+  },
+  "overrides": {
+    "bxslider-4": {
+      "main": [
+        "src/images/*.*"
+      ]
+    },
+    "bootstrap": {
+      "main": [
+        "fonts/*.*",
+        "dist/css/*.css"
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@import "bxslider.less";
+@import "layout.less";
+@import "index.less";
+@import "volunteers.less";
+@import "animals.less";
+@import "animal-modal.less";
+@import "shelters.less";
+@import "shelter.less";
+@import "new.less";
+@import "dropzone.css";
+@import "../lib/bootstrap/less/scaffolding.less";
+@import "../lib/bootstrap/less/type.less";
+@import "../lib/bootstrap/less/forms.less";
+@import (reference) "mixins.less";
+
+body {
+    margin: 0;
+}
+
+.center{
+    text-align:center;
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+.hidden{
+    display: none;
+}
+
+// для изображений, которые задаются через background
+.pseudo-image() {
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
+// любой див с классом img следует считать псевдоизображением
+div.img {
+    .pseudo-image;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: @h-color;
+}

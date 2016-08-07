@@ -1,0 +1,132 @@
+@import (reference) "mixins.less";
+
+@fab-bg-color: #097aaa;
+
+
+.carousel-container {
+	display: flex;
+	> .carousel {
+		flex: 2;
+		> .bx-wrapper {
+			margin: 0;
+		}
+		div.img {
+			@media (min-width: @screen-sm-min){
+				width: @container-sm - 30px;
+			}
+			@media (min-width: @screen-md-min){
+				width: @container-md - 30px;
+			}
+			@media (min-width: @screen-lg-min){
+				width: @container-lg - 30px;
+			}
+		}
+	}
+}
+
+@news-image-size: 160px;
+
+.info-row {
+	.row-2();
+	>.volunteer-text{
+		align-self: flex-start;
+		padding: 40px;
+  		padding-top: 20px;
+		>h1{
+			padding-bottom:5px;
+		}
+	}
+}
+
+.news-block {
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	> div {
+		flex: 1 1 0;
+		padding-top:10px;
+		padding-bottom: 20px;
+		display: flex;
+		> .img {
+			flex: 0 0 @news-image-size;
+			.square(@news-image-size);
+			margin-right: 20px;
+		}
+		> div {
+			position: relative;
+			overflow: hidden;
+			> h3 {
+				margin-top: 0;
+				margin-bottom: 20px;
+			}
+			> p + p {
+				position: absolute;
+				color:@top-color;
+				cursor:pointer;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				text-align: left;
+				margin: 0;
+				padding: 10px 0;
+				background-color: white;
+				border-top: 1px grey solid;
+				&:hover{
+					color:@h-color;
+				}
+			}
+		}
+	}
+	> div + div {
+		border-top: 2px solid @body-bg;
+		padding-top:30px;
+	}
+}
+
+@animal-picture-size: 200px;
+
+.lost-animals-row {
+	.row-2();
+	> * {
+		padding-bottom: 30px;
+		>h1{
+			margin-bottom:20px;
+		}
+	}
+	.image-list {
+		display: flex;
+		overflow: hidden;
+		> .image-item{
+			display:inline-block;
+			flex: 0 1 @animal-picture-size * 2;
+			height: @animal-picture-size;
+			position: relative;
+			>.img-color{
+				background-color: rgba(0,0,0,0);
+				transition: background-color 0.5s ease;
+				height: @animal-picture-size;
+			    width: 100%;
+			    position: absolute;
+				padding-left: 20px;
+				>h4,h5{
+					color:#A7FFEB;
+					display: none;
+					
+				}
+				>h4{
+					text-transform: uppercase;
+				}
+			}
+			>.img-color:hover{
+				background-color: rgba(0,0,0,0.7);
+				cursor: pointer;	
+				>h4,h5{
+					display: block;
+				}		    
+			}
+		}
+		> .image-item + .image-item {
+			margin-left: 10px;
+		}
+	}
+}

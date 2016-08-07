@@ -1,0 +1,74 @@
+@{
+    string appName = "Give Future";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @appName</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    
+
+
+</head>
+<body>
+    @RenderSection("modal", required: false)
+    <div class="navigation">
+        <div>
+            <a href='@Url.Action("Index", "Home", new {})'>
+                <div>
+                    <img src="/images/logo.png">
+                </div>
+               
+            </a>
+            
+            
+            @{
+                var indexClass = "";
+                var animalsClass = "";
+                var sheltersClass = "";
+                var volunteersClass = "";
+                var current = " class=current";
+                string pageAction = ViewBag.PageAction;
+                switch (pageAction)
+                {
+                    case "Index":
+                        indexClass = current;
+                        break;
+                    case "Animals":
+                        animalsClass = current;
+                        break;
+                    case "Shelters":
+                        sheltersClass = current;
+                        break;
+                    case "Volunteers":
+                        volunteersClass = current;
+                        break;
+                }
+            }
+            <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
+            <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
+            <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
+            <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
+        </div>
+    </div>
+    <div class="main-container">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @appName</p>
+        </footer>
+    </div>
+    
+    <script src="/js/almond.js"></script> 
+    <script src="/js/index.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

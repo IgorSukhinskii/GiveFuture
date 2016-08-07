@@ -1,0 +1,105 @@
+@import (reference) "mixins.less";
+
+.red{
+	color:@red;
+}
+
+.contacts-block {
+	.content-block();
+	> div {
+		.split-2-columns(60px);
+		> .message-info {
+			color:@text-color;
+			>ul {
+				>*:not(:first-child) {
+					margin-top:20px;
+				}
+				
+				>li{
+					>a{
+						color:@top-color;
+					}
+				}
+			}
+		}
+		> .message-form {
+			> form {
+				> div {
+					margin-bottom: 7px;
+					> input, textarea {
+						.form-control();
+						width:100%;
+						max-width:100%;
+						padding-left: 8px;
+						border-radius:0px;
+					}
+					> #inputMessage{
+						height:150px;
+					}
+				}
+				> button {
+					.btn();
+					.btn-danger();
+					.pull-right();
+					border-radius: 0px;					
+  					background-color: #EF5350;
+				}
+			}
+		}
+	}
+}
+
+
+.help-block {	
+	.content-block();
+	> div {
+		.split-3-columns(40px);
+		> .message-info {
+			>ul {
+				padding-left:20px;
+				>li{
+					margin-bottom:5px; 
+				}
+			}
+		}
+	}
+	color:@text-color !important;
+}
+
+.find-block {
+	.content-block();
+	> div {
+		.split-2-columns(60px);
+	}
+}
+
+.shelters-list-info{
+	>* {
+		>.description{
+			>.hrefs{
+				>*{
+					width:120px;
+					text-align:center;
+					display: inline-block; 
+					margin-right: 20px; 
+					cursor: pointer;
+				}	
+				>.img-color{
+					display: inline-block;
+					background-color: rgba(255,255,255,0);
+					transition: background-color 0.5s ease;
+					height: 15%;
+				    width: 120px;
+				    position: absolute;
+					padding-left: 20px;
+					
+				}
+				>.img-color:hover{
+					background-color: rgba(255,255,255,0.3);
+					cursor: pointer;		    
+				}
+			}	
+		}
+	}
+	
+}
