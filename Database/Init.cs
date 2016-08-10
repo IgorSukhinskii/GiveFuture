@@ -19,7 +19,7 @@ namespace SweetHome.Database
         }
         private void ParseShelters(string fileContents)
         {
-            var shelters = fileContents.Split(new string[]{"\n\n\n"}, StringSplitOptions.RemoveEmptyEntries)
+            var shelters = fileContents.Replace("\r", "").Split(new string[]{"\n\n\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(shelterString => 
                 {
                     var shelterFields = shelterString.Split(new char[]{'\n'});
@@ -45,7 +45,7 @@ namespace SweetHome.Database
         }
         private void ParseAnimals(string fileContents)
         {
-            var animals = fileContents.Split(new string[]{"\n\n\n\n"}, StringSplitOptions.RemoveEmptyEntries)
+            var animals = fileContents.Replace("\r", "").Split(new string[]{"\n\n\n\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(animalString =>
                 {
                     var animalFields = animalString.Split(new string[]{"\n\n"}, StringSplitOptions.RemoveEmptyEntries);

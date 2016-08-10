@@ -226,7 +226,6 @@
         var img = require('utils/img');
         $('[data-animal]').on('click', function() {
             var animalData = $(this).data('animal');
-            console.log(animalData.Images);
             // Заполним модал данными из animalData
             $('.animal-modal__animal-name')
                 .html(animalData.Name);
@@ -241,13 +240,13 @@
             $('.animal-modal__place-link')
                 .attr("href","/Shelters/"+animalData.Shelter.URL);
                    
-            if (animalData.PhoneNumbers.length != 0){
+            if (animalData.Phones.length != 0){
                 $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
-                .html(animalData.PhoneNumbers);
+                .html(animalData.Phones);
             }
             else{
                 $('.animal-modal__phone')
-                .html(animalData.Shelter.PhoneNumbers);
+                .html(animalData.Shelter.Phones);
             }              
           
             $('.animal-modal__description-text')
@@ -266,13 +265,13 @@
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = '"';
                 if (i==0) active = ' selected" ';
-                photoElems += '<li class="animal-modal__gallery-photo' + active + '>' + '<div class="animal-modal__gallery-photos-image-container"><img class="'+ get_orientation(animalData.Images[i]) +'"  src="' + animalData.Images[i] + '"/></div></li>';
+                photoElems += '<li class="animal-modal__gallery-photo' + active + '>' + '<div class="animal-modal__gallery-photos-image-container"><img class="'+ get_orientation(animalData.Images[i].Url) +'"  src="' + animalData.Images[i].Url + '"/></div></li>';
             }
             var galleryElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = '"';
                 if (i==0) active = ' selected" ';
-                galleryElems += '<li class="animal-modal__gallery-item' + active + '>' + img.div(animalData.Images[i]) + '</li>';
+                galleryElems += '<li class="animal-modal__gallery-item' + active + '>' + img.div(animalData.Images[i].Url) + '</li>';
             }
             if (animalData.Images.length > 1) {
                 $('.animal-modal__gallery-aux').html(galleryElems);
