@@ -13,6 +13,7 @@
 
 .animal-modal {
 	.modal-x(@padding:0px);
+	font-family: 'Ubuntu', sans-serif;
 
 	&__aside {
 		width: 830px;
@@ -28,7 +29,7 @@
 
 	&__close {
 		.close-button();
-		@color: #666;
+		@color: #eee;
 		position: absolute;
 		right: 0;
 		.md({
@@ -38,7 +39,7 @@
 		cursor: pointer;
 		color: @color;
 		&:hover {
-			color: darken(@color, 20%);
+			color: #fff;
 		}
 	}
 	

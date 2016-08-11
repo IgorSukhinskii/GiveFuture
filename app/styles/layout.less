@@ -1,13 +1,18 @@
 @import (reference) "mixins.less";
 
+
 // отступы для навбаров совпадают с их высотами
 body {
     padding-bottom: @footer-height;
     background-color: @body-bg;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 .p{
     color:@text-color;
+	font-family: 'Ubuntu', sans-serif;
+	line-height: 1.5;
+	font-size: 16px;
 }
 
 .myhidden{
@@ -18,6 +23,7 @@ body {
 .navigation {
     height: @navbar-height; 
     width: 100%;
+	font-family: 'Ubuntu', sans-serif;
     > div {
         display: flex;
         align-items: center;
