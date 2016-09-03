@@ -187,3 +187,23 @@
 	}
 	
 }
+
+.text-container-fixed(@gutter: @grid-gutter-width) {
+	margin-right: auto;
+	margin-left: auto;
+	&:extend(.clearfix all);
+}
+
+.text-container {
+	.text-container-fixed();
+
+	@media (min-width: @screen-sm) {
+		width: @text-container-sm;
+	}
+	@media (min-width: @screen-md) {
+		width: @text-container-md;
+	}
+	@media (min-width: @screen-lg) {
+		width: @text-container-lg;
+	}
+}

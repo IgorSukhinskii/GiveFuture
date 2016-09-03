@@ -1,4 +1,4 @@
-@{
+﻿@{
     string appName = "Give Future";
 }
 <!DOCTYPE html>
@@ -19,21 +19,21 @@
 <body>
     @RenderSection("modal", required: false)
     <div class="navigation">
-        <div>
-            <a href='@Url.Action("Index", "Home", new {})'>
-                <div>
-                    <img src="/images/logo.png">
+        <div class="navigation__logo-container">
+            <a class="navigation__logo-link navigation__menu-link" href='@Url.Action("Index", "Home", new {})'>
+                <div class="navigation__logo-img-container">
+                    <img class="navigation__logo-img" src="/images/logo.png">
                 </div>
-               
             </a>
             
             
             @{
-                var indexClass = "";
-                var animalsClass = "";
-                var sheltersClass = "";
-                var volunteersClass = "";
-                var current = " class=current";
+                var baseClass = "navigation__menu-link";
+                var indexClass = baseClass;
+                var animalsClass = baseClass;
+                var sheltersClass = baseClass;
+                var volunteersClass = baseClass;
+                var current = "navigation__menu-link navigation__menu-link_current";
                 string pageAction = ViewBag.PageAction;
                 switch (pageAction)
                 {
@@ -51,17 +51,17 @@
                         break;
                 }
             }
-            <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
-            <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
-            <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
-            <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
+            <a href="@Url.Action("Index", "Home", new {})" class="@indexClass">Главная</a>
+            <a href="@Url.Action("Animals", "Home", new {})" class="@animalsClass">Ищем хозяев</a>
+            <a href="@Url.Action("Shelters", "Home", new {})" class="@sheltersClass">Приюты</a>
+            <a href="@Url.Action("Volunteers", "Home", new {})" class="@volunteersClass">Волонтёрам</a>
         </div>
     </div>
     <div class="main-container">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - @appName</p>
+        <footer class="footer">
+            <p class="footer__content">&copy; @DateTime.Now.Year - @appName</p>
         </footer>
     </div>
     

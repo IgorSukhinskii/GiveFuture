@@ -33,8 +33,16 @@ namespace SweetHome.Controllers
                 .Include(animal => animal.Images)
                 .Include(animal => animal.Phones)
                 .ToList();
-            ViewBag.Dogs = dogs.OrderBy(_ => rng.Next()).Take(2);
-            ViewBag.Cats = cats.OrderBy(_ => rng.Next()).Take(2);
+            var twoDogs = dogs.OrderBy(_ => rng.Next()).Take(2).ToList();
+            var twoCats = cats.OrderBy(_ => rng.Next()).Take(2).ToList();
+            if(twoDogs.Count < 2 || twoCats.Count < 2)
+            {
+            	ViewBag.Animals = twoDogs.Concat(twoCats);
+            }
+            else
+            {
+            	ViewBag.Animals = new List<ShelterAnimal> { twoDogs[0], twoCats[0], twoCats[1], twoDogs[1] };
+            }
             return View();
         }
 

@@ -1,0 +1,55 @@
+@import (reference) "mixins.less";
+
+// главная навигационная панель
+.navigation {
+	height: @navbar-height;
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+
+	&__logo-container {
+		.container();
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+
+	&__menu-link {
+		color:#ddd;
+		height: 100px;
+		line-height: 80px;
+		border-top: 6px rgba(0,0,0,0) solid ;
+		margin-left: 30px;
+		font-size: 18px;
+		text-decoration: none;
+
+		&_current {
+			color: #A7FFEB;
+			border-top: 6px #A7FFEB solid;
+		}
+
+		&:hover{
+			text-decoration: none;
+			color:#ddd;
+		}
+	}
+
+	&__logo-link {
+		font-size: 30px;
+		margin-right: auto;
+		text-decoration: none;
+		border-top: 0px;
+
+		&:hover{
+			text-decoration: none;
+		}
+	}
+
+	&__logo-img {
+		width: 270px;
+		height: 70px;
+		filter: FlipH;
+	}
+}
