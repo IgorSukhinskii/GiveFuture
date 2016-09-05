@@ -4,36 +4,11 @@
     ViewBag.Title = "Home Page";
 }
 
-@section modal {
-<div id="animal-modal"> 
-    <aside>
-        <section>
-            <h3></h3>
-            <p><a></a></p>
-            <p></p>
-        </section>
-        <section class="gallery">
-            <ul class="gallery-aux">
-            </ul>
-        </section>
-        <section>
-            <p></p>
-        </section>
-        <footer>
-            <a></a>
-            <a></a>
-            <a></a>
-        </footer>
-        <span class="close"></span>
-    </aside>
-</div>
-}
-
 <div class="homepage-img">
-    <img class="homepage-img__content" src="https://psv4.vk.me/c615527/u96336936/docs/9660f6ed380d/IMG_7658.jpg";">
-
+    <img class="homepage-img__content" src="/images/main-background.jpg">
     </img>
 </div>
+
 <div class="info-row">
 	<div class="info-row__container">
         <h1 class="info-row__title">О НАС</h1>
@@ -43,53 +18,54 @@
 		Каждый из нас хочет лучшей жизни. Наши беззащитные мохнатые собратья не исключение. Им нужна Ваша помощь. Именно Вы можете скрасить их жизнь. Они станут Вашим лучшим другом. А друзей покупать не нужно. Просто подарите им право быть счастливыми.   </p>
 	</div>
 </div>
+
 <div class="lost-animals-row">
 	<div class="lost-animals-row__container">
 
 		<h1 class="lost-animals-row__title">Они ждут своих хозяев</h1>
 		<div class="lost-animals-row__image-list">
 			@foreach(ShelterAnimal animal in ViewBag.Animals)
-					{
-						<a class="image-item" href="/Home/Animals?animal_id=@animal.Id">
-							<div class="img-color">
-								<h4><b>@animal.Name</b></h4>
-								@if(animal.Shelter.Name == "Частная передержка"){
-									<h5>@animal.Shelter.Name</h5>
-								 }
-								 else{
-									<h5>Приют "@animal.Shelter.Name"</h5>
-								}
-								 @if(animal.BirthDay != null)
-								 {
-									<h5>@DateUtils.Age(animal.BirthDay.GetValueOrDefault(),DateTime.UtcNow)</h5>
-								 }
-								 else
-								 {
-									 var PhoneNumbers = animal.Phones.Select(phone => phone.PhoneNumber);
-									 var ShelterPhoneNumbers = animal.Shelter.Phones.Select(phone => phone.PhoneNumber);
-									 <h5>
-										 @if (PhoneNumbers.Any()){
-											 foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+				{
+					<a class="lost-animals-row__image-item" href="/Home/Animals?animal_id=@animal.Id">
+						<div class="lost-animals-row__img-color">
+							<h4 class="lost-animals-row__img-item-name">@animal.Name</h4>
+							@if(animal.Shelter.Name == "Частная передержка"){
+								<h5 class="lost-animals-row__img-item-shelter">@animal.Shelter.Name</h5>
+							 }
+							 else{
+								<h5 class="lost-animals-row__img-item-shelter">Приют "@animal.Shelter.Name"</h5>
+							}
+							 @if(animal.BirthDay != null)
+							 {
+								<h5 class="lost-animals-row__img-item-info">@DateUtils.Age(animal.BirthDay.GetValueOrDefault(),DateTime.UtcNow)</h5>
+							 }
+							 else
+							 {
+								 var PhoneNumbers = animal.Phones.Select(phone => phone.PhoneNumber);
+								 var ShelterPhoneNumbers = animal.Shelter.Phones.Select(phone => phone.PhoneNumber);
+								 <h5 class="lost-animals-row__img-item-info">
+									 @if (PhoneNumbers.Any()){
+										 foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+											  @ph
+										  }
+									 }
+									 else
+									 {
+										@if (ShelterPhoneNumbers.Any()){
+											 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
 												  @ph
 											  }
 										 }
-										 else
-										 {
-											@if (ShelterPhoneNumbers.Any()){
-												 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
-													  @ph
-												  }
-											 }
-										 }
-									 </h5>
-								 }
+									 }
+								 </h5>
+							 }
 
-							</div>
-							<div class="img"
-								 style="background-image: url('@animal.Images[0].Url');">
-							</div>
-						</a>
-					}
+						</div>
+						<div class="lost-animals-row__img img"
+							 style="background-image: url('@animal.Images[0].Url');">
+						</div>
+					</a>
+				}
 		</div>
 	</div>
 </div>
@@ -110,64 +86,6 @@
             $("body").css("overflow-y", "auto");
             $("body").css("padding-right", 0);
         });
-        $("#animal-modal").click(function(e){
-            if (e.target === this){
-                window.history.pushState("", "Animals", "/Home/Animals");
-                $(this).removeClass("active");   
-                $("body").css("overflow-y", "auto");
-                $("body").css("padding-right", 0);
-            }
-        });
-        require('bxslider');
-        var modalSlider = undefined;
-        $('.carousel>.bxslider').bxSlider({
-            mode: 'horizontal',
-            captions: true,
-            pager:  false
-        });
-        $('.news-block>div').on('click', function() {
-            var header = $(this).find('div>h3').html();
-            var text = $(this).find('div>p').html();
-            var image = $(this).find('div.img').css('background-image');
-            var images = [image.substring(4, image.length - 1)];
-            // Заполним модал данными
-            $('#animal-modal>aside>section:nth-child(1)>h3')
-                .html(header);
-           $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
-                .html(text);
-            var photoElems = "";
-            for (var i = 0; i < images.length; i++) {
-                var active = "";
-                if (i==0) active = ' class="selected"';
-                photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + images[i] + '\');"></div></li>';
-            }
-            if (images.length > 1) {
-                $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
-            } else {
-                $('#animal-modal>aside>.gallery>.gallery-aux').html("");
-            }
-            $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
-            $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
-            modalSlider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
-                mode: 'horizontal',
-                // captions: true,
-                pager:  false,
-                onSlideBefore: function(e, o, i) {
-                    $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
-                    $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
-                }
-            });
-            $("#animal-modal").addClass("active");
-            $("body").css("overflow-y", "hidden");
-            $("body").css("padding-right", scroll_w + "px");
-        });
-        var $news = $(".news_msg");
-        for (var i = 0; i < $news.length; i++){ 
-            if (($news[i].offsetHeight) >=  ($news[i].scrollHeight)) {
-                $($news[i]).children(".readmore").css("display","none");
-            }
-         }
-        
     })();
 </script>
 }
