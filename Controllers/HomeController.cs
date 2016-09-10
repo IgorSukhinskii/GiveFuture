@@ -59,7 +59,8 @@ namespace SweetHome.Controllers
             [FromQuery] Color? color,
             [FromQuery(Name = "age_less")] int? ageLess,
             [FromQuery(Name = "size")] Size? animalSize,
-            [FromQuery(Name = "gender")] Gender? animalGender)
+            [FromQuery(Name = "gender")] Gender? animalGender,
+            [FromQuery(Name = "q")] string searchQuery)
         {
             ViewBag.PageAction = "Animals";
             ViewBag.AnimalId = animalId;
@@ -72,6 +73,12 @@ namespace SweetHome.Controllers
             IQueryable<Shelter> shelters = context.Shelters;
             ViewBag.Shelters = shelters.ToList();
             IQueryable<ShelterAnimal> animals = context.ShelterAnimals;
+            if (searchQuery != null)
+            {
+                ViewBag.All = false;
+                ViewBag.SearchQuery = searchQuery;
+                animals = animals.Where(animal => animal.Name.ToLower().Contains(searchQuery.ToLower()) || animal.Shelter.Name.ToLower().Contains(searchQuery.ToLower()));
+            }
             shelterId.IfNotNull(id => {
                 ViewBag.ShelterId = id;
                 ViewBag.All = false;

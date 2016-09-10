@@ -1,25 +1,25 @@
 @using SweetHome.Utils;
 @model IEnumerable<SweetHome.Models.Shelter>
-	<div class="shelters2">
+	<div class="shelters-container">
 		@foreach(var shelter in Model)
 		{
 			@if(shelter.Name != "Частная передержка"){
-				<div class="shelter-item">
-					<div  class="image-item">
+				<div class="shelter-card">
+					<div class="shelter-card__images">
 						<div class="img"
 				         style="background-image: url('@shelter.ImageUrl');"
 				         title="1">
 				    	</div>
-						<div class="hrefs">
-							<div class="href">
-				              <a class="img-color"></a>
+						<div class="shelter-card__links-container">
+							<div class="shelter-card__link">
+				              <a class="shelter-card__link-shade"></a>
 							  <div>
 									<img src="/images/LAPA.png" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
 									<span>Наши животные </span>
-								</div>
+							  </div>
 							</div>
-							<div class="href">
-				                <a class="img-color" href="https://vk.com/priutdrug74" target="_blank"></a>
+							<div class="shelter-card__link">
+				                <a class="shelter-card__link-shade" href="https://vk.com/priutdrug74" target="_blank"></a>
 								<div>
 								  	<img src="http://thedkmodels.com/vk.jpg" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
 									<span>Группа вконтакте </span>
@@ -27,8 +27,8 @@
 							</div>
 							@if(shelter.Name == "Друг") 
 							  {
-								  <div class="href">
-						                <a class="img-color" href="http://priutdrug74.ru" target="_blank"></a>
+								  <div class="shelter-card__link">
+						                <a class="shelter-card__link-shade" href="http://priutdrug74.ru" target="_blank"></a>
 										<div>
 										  	<img src="/images/WEB.png" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
 											<span>Веб-сайт</span>
@@ -38,29 +38,29 @@
 							  
 						</div>
 					</div>
-					<div class="shelter-description"> 
+					<div class="shelter-card__description"> 
 							 @if(shelter.Name == "Хочу домой") 
 							  {
-								  <h2><a href="/Shelters/HochuDomoi">@shelter.Name</a></h2>
+								  <h2><a class="shelter-card__name" href="/Shelters/HochuDomoi">@shelter.Name</a></h2>
 							  }
 							  @if(shelter.Name == "Лучик надежды") 
 							  {
-								  <h2><a href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
+								  <h2><a class="shelter-card__name" href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
 							  }
 							  @if(shelter.Name == "Друг") 
 							  {
-								  <h2 style="margin-top:0px;"><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
+								  <h2 style="margin-top:0px;"><a class="shelter-card__name" href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
 							  }
 							  @if(shelter.Name == "Холли") 
 							  {
-								  <h2><a href="/Shelters/Holly" target="_blank" >@shelter.Name</a></h2>
+								  <h2><a class="shelter-card__name" href="/Shelters/Holly" target="_blank" >@shelter.Name</a></h2>
 							  }
 							  
 							
-						  <div class="phone">
-							  @shelter.Phones.PhonesList();					  		
+						  <div class="shelter-card__phone">
+							  @shelter.Phones.PhonesList();		  		
 						  </div>
-						  <div class="text">
+						  <div class="shelter-card__text">
 							  @shelter.Info
 						  </div>
 					</div>	
