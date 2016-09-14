@@ -67,6 +67,60 @@
 					</a>
 				}
 		</div>
+		<div class="lost-animals-row__view-all">
+			<a class="lost-animals-row__view-all-link" href="/Home/Animals">Смотреть всех</a>
+		</div>
+
+	</div>
+</div>
+
+<div class="donation">
+	<div class="donation__container">
+		<h3 class="donation__title"> СДЕЛАЙТЕ ПОЖЕРТВОВАНИЕ</h3>
+		<div class="donation__content">
+			<div class="donation__text">
+				Каждый приют, функционирующий в пределах Челябинской области, постоянно нуждается в кормах,
+				лекарственных средствах, строительных материалах, оплате передержек и стационаров для больных животных. Приюты не получают помощи ни от государства, ни от городских властей, поэтому финансирование лечения и содержания животных осуществляется только волонтерами-основателями и добровольными пожертвованиями неравнодушных граждан. Нам важна любая, даже самая маленькая помощь!
+			</div>
+			<form class="donation__form" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+				<input type="hidden" name="receiver" value="410013398640025">
+				<input type="hidden" name="formcomment" value="Челябинский фонд помощи животным «GiveFuture»">
+				<input type="hidden" name="short-dest" value="Челябинский фонд помощи животным «GiveFuture»">
+				<input type="hidden" name="quickpay-form" value="donate">
+				<input type="hidden" name="targets" value="Помощь животным в приютах г. Челябинска">
+				<div class="donation__form-group">
+					<label for="sum">Сумма пожертвования</label>
+					<div class="donation__form-row" >
+						<input type="text" class="donation__form-input" id="sum" name="sum" value="100" >
+						<span>руб.</span>
+					</div>
+				</div>
+				<div class="donation__form-group">
+					<label class="donation__form-label" for="">Способ оплаты</label>
+					<div class="donation__btn-group" data-toggle="buttons">
+						<input class="donation__btn-radio-input" type="radio" id="AC" name="paymentType" autocomplete="off" value="AC" checked>
+						<label for="AC" class="donation__btn-radio-label">
+							<img class="donation__form-icon b-icon b-form-radio__ico" src="/images/quickpay-widget__any-card.png" alt="" title="">
+						</label>
+						<input class="donation__btn-radio-input" type="radio" id="MC" name="paymentType" autocomplete="off" value="MC">
+						<label for="MC" class="donation__btn-radio-label">
+							<img class="donation__form-icon b-icon b-form-radio__ico" src="/images/quickpay-widget__mobile.png" alt="" title="">
+						</label>
+						<input class="donation__btn-radio-input" type="radio" id="PC" name="paymentType" autocomplete="off" value="PC">
+						<label class="donation__btn-radio-label" for="PC">
+							<img class="donation__form-icon b-icon b-form-radio__ico" src="/images/quickpay-widget__yamoney.png" alt="" title="">
+						</label>
+					</div>
+				</div>
+				<div class="donation__form-group" id="commentGroup">
+					<label class="donation__form-label" for="comment" >Комментарий (необязательно)</label>
+					<textarea class="donation__form-textarea" name="comment" rows="3" placeholder="Здесь можно указать цель пожертвования, например, на корм и лечение животных."></textarea>
+				</div>
+				<div class="donation__button-cover">
+					<button class="donation__button" type="submit">ПОМОЧЬ</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 
