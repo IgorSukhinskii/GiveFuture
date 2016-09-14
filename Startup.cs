@@ -57,6 +57,10 @@ namespace SweetHome
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "shelters",
+                    template: "Shelters/{*shelter}",
+                    defaults: new { controller = "Shelters", action = "Shelter" });
             });
         }
     }
