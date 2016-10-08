@@ -1,105 +1,161 @@
 @import (reference) "mixins.less";
 
-.red{
-	color:@red;
-}
+.shelter {
+	all: initial;
 
-.contacts-block {
-	.content-block();
-	> div {
-		.split-2-columns(60px);
-		> .message-info {
-			color:@text-color;
-			>ul {
-				>*:not(:first-child) {
-					margin-top:20px;
-				}
-				
-				>li{
-					>a{
-						color:@top-color;
-					}
-				}
-			}
-		}
-		> .message-form {
-			> form {
-				> div {
-					margin-bottom: 7px;
-					> input, textarea {
-						.form-control();
-						width:100%;
-						max-width:100%;
-						padding-left: 8px;
-						border-radius:0px;
-					}
-					> #inputMessage{
-						height:150px;
-					}
-				}
-				> button {
-					.btn();
-					.btn-danger();
-					.pull-right();
-					border-radius: 0px;					
-  					background-color: #EF5350;
-				}
-			}
-		}
+	&__background {
+		position: relative;
+		overflow: hidden;
+		height: 500px;
+	}
+
+
+	&__background-overlay {
+		position: absolute;
+		height: 500px;
+		width: 100%;
+		background-color: rgba(0,0,0,0.4);
+		z-index: 1;
+	}
+
+
+	&__background-img {
+		position: absolute;
+		margin: auto;
+		min-height: 100%;
+		min-width: 100%;
+		left: -100%;
+		right: -100%;
+		top: -100%;
+		bottom: -100%;
+	}
+
+	&__container {
+		position: relative;
+	}
+
+	&__description {
+		position: absolute;
+		top: 210px;
+		max-width: 980px;
+		margin: 0 10%;
+		z-index: 2;
+	}
+
+	&__title {
+		font-size: 40px;
+		color: #a7ffeb;;
+	}
+
+	&__text {
+		font-size: 22px;
+		color: #ddd;
+		line-height: 1.5;
+	}
+
+	&__hrefs {
+		position: absolute;
+		top: 460px;
+		right: 0;
+		width: 330px;
+		font-size: 0;
+	}
+
+	&__link-container {
+		display: inline-block;
+		width: 80px;
+		height: 80px;
+		background: red;
+		border-radius: 50%;
+		margin-right: 20px;
 	}
 }
 
+.shelter-animals {
+	display: flex;
 
-.help-block {	
-	.content-block();
-	> div {
-		.split-3-columns(40px);
-		> .message-info {
-			>ul {
-				padding-left:20px;
-				>li{
-					margin-bottom:5px; 
-				}
-			}
-		}
+	&__image-list {
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-between;
+		justify-content: space-between;
+		overflow: hidden;
+		margin-bottom: 30px;
 	}
-	color:@text-color !important;
+
+	&__image-item {
+		display: inline-block;
+		flex: 0 0 260px;
+		height: 260px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		position: relative;
+		margin-right: 30px;
+	}
+
+	&__image-item:hover &__img-color {
+		background-color: rgba(0,0,0,0.7);
+		cursor: pointer;
+		display: block;
+	}
+
+	&__img-color {
+		display: none;
+		background-color: rgba(0, 0, 0, 0);
+		transition: all 2s ease;
+		height: 100px;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		padding-left: 20px;
+	}
+	&__img-item-name{
+		color:#A7FFEB;
+		text-transform: uppercase;
+	}
+
+	&__img-item-shelter,
+	&__img-item-info{
+		color:#A7FFEB;
+	}
+
+	&__container {
+		.text-container();
+		padding: 30px 0 40px;
+	}
+
+	&__title {
+		margin-bottom:20px;
+		text-align: center;
+		font-size: 40px;
+	}
+
+	&__img {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
 }
 
-.find-block {
-	.content-block();
-	> div {
-		.split-2-columns(60px);
+.shelter-help{
+
+	&__message-info{
+		background-color: #00bfa5;
+		width: 33%;
+		display: inline-block;
+		vertical-align: top;
 	}
+
 }
 
-.shelters-list-info{
-	>* {
-		>.description{
-			>.hrefs{
-				>*{
-					width:120px;
-					text-align:center;
-					display: inline-block; 
-					margin-right: 20px; 
-					cursor: pointer;
-				}	
-				>.img-color{
-					display: inline-block;
-					background-color: rgba(255,255,255,0);
-					transition: background-color 0.5s ease;
-					height: 15%;
-				    width: 120px;
-				    position: absolute;
-					padding-left: 20px;
-					
-				}
-				>.img-color:hover{
-					background-color: rgba(255,255,255,0.3);
-					cursor: pointer;		    
-				}
-			}	
-		}
+.shelter-contacts {
+	&__message-info {
+		display: inline-block;
+		width: 45%;
 	}
-	
+
+	&__message-form-container{
+		display:inline-block;
+	}
 }
