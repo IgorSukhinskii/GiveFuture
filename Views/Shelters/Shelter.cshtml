@@ -185,19 +185,19 @@
 				</ul>
 			</div>
 			<div class="shelter-contacts__message-form-container">
-				<form class="shelter-contacts__message-form">
+				<form class="shelter-contacts__message-form" action="SendEmail" method="POST">
 					<div class="shelter-contacts__form-group">
-						<input type="text" class="shelter-contacts__form-input" id="inputName" placeholder="Имя">
+						<input type="text" class="shelter-contacts__form-input" id="inputName" placeholder="Имя" name="name">
 					</div>
 					<div class="shelter-contacts__form-group">
-						<input type="email" class="shelter-contacts__form-input" id="inputEmail" placeholder="Email">
+						<input type="email" class="shelter-contacts__form-input" id="inputEmail" placeholder="Email" name="email">
 					</div>
 					<div class="shelter-contacts__form-group">
-						<input type="text" class="shelter-contacts__form-input" id="inputTopic" placeholder="Тема">
+						<input type="text" class="shelter-contacts__form-input" id="inputTopic" placeholder="Тема" name="subject">
 					</div>
 					<div class="shelter-contacts__form-group">
 						<textarea class="shelter-contacts__form-textarea" id="inputMessage"
-							placeholder="Сообщение"></textarea>
+							placeholder="Сообщение" name="text"></textarea>
 					</div>
 					<button class="shelter-contacts__form-button" type="submit">Отправить</button>
 				</form>

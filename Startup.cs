@@ -32,6 +32,7 @@ namespace SweetHome
             services.AddMvc();
             var connection = @"Server=localhost;Database=give_future;Username=give_future;Password=1q2w3e4r";
             services.AddDbContext<Models.SweetHomeContext>(options => options.UseNpgsql(connection));
+            services.AddSingleton<Utils.IEmailSender>(new Utils.EmailSender(Configuration.GetValue<string>("SENDGRID_KEY")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,10 +58,16 @@ namespace SweetHome
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                
                 routes.MapRoute(
                     name: "shelters",
-                    template: "Shelters/{*shelter}",
+                    template: "Shelters/{shelterName}",
                     defaults: new { controller = "Shelters", action = "Shelter" });
+
+                    routes.MapRoute(
+                    name: "shelterEmail",
+                    template: "Shelters/{shelterName}/SendEmail",
+                    defaults: new { controller = "Shelters", action = "SendEmail" });
             });
         }
     }
