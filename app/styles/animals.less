@@ -11,7 +11,13 @@
 
 
 .animals {
-	display: flex;
+	margin-top: 100px;
+
+	&__content {
+		max-width: 1170px;
+		margin: 0 auto;
+		display: flex;
+	}
 
 	&__search-form-container {
 		width:100%;
@@ -78,6 +84,7 @@
 
 	&__filter-button {
 		.btn();
+		padding: 10px 12px;
 		margin-top: 20px;
 		width: 100%;
 		border-radius: 0;
