@@ -143,25 +143,25 @@
 							</div>
 							<div class="donation__form-group" id="paymentTypes">
 								<label class="donation__form-label">Способ оплаты</label>
-								<div class="donation__btn-group" data-toggle="buttons">
+								<div class="donation__btn-group">
+									<input type="radio" class="donation__btn-radio-input" name="paymentType" id="AC"
+										autocomplete="off" value="AC" checked>
 									<label for="AC" class="donation__btn-radio-label">
 										<img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__any-card.png" alt=""
 											title=""/>
 									</label>
-									<input type="radio" class="donation__btn-radio-input" name="paymentType" id="AC"
-										autocomplete="off" value="AC" checked>
-									<label class="donation__btn-radio-label">
-										<img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__mobile.png" alt=""
-											title="">
-									</label>
-									<input for="MC" type="radio" class="donation__btn-radio-input" name="paymentType" id="MC"
+									<input type="radio" class="donation__btn-radio-input" name="paymentType" id="MC"
 										autocomplete="off" value="MC">
-									<label for="PC" class="donation__btn-radio-label">
-										<img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__yamoney.png" alt=""
+									<label for="MC" class="donation__btn-radio-label">
+										<img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__mobile.png" alt=""
 											title="">
 									</label>
 									<input type="radio" class="donation__btn-radio-input" name="paymentType" id="PC"
 										autocomplete="off" value="PC">
+									<label for="PC" class="donation__btn-radio-label">
+										<img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__yamoney.png" alt=""
+											title="">
+									</label>
 								</div>
 							</div>
 							<div class="donation__form-group" id="commentGroup">
