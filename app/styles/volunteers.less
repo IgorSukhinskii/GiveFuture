@@ -1,267 +1,92 @@
 @import (reference) "mixins.less";
 
-#volunteers-modal {
-	.modal-x(@padding: 30px);
-	span.close {
-		.close-button();
-		@color: #666;
+
+.volunteers {
+	all: initial;
+
+	&__background {
+		position: relative;
+		overflow: hidden;
+		height: 500px;
+	}
+
+	&__background-overlay {
 		position: absolute;
-		right: 0;
-		.md({
-			right: -30px;
-		});
-		top: 0;
-		cursor: pointer;
-		color: @color;
-		&:hover {
-			color: darken(@color, 20%);
-		}
+		height: 500px;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+		z-index: 1;
 	}
-	>aside {
-		>section{
-			>div.help-info {
-				margin-top:20px;
-			}
-		}
-	}
-	
-}
 
-.volunteers-h {
-	background-color: #009688;
-	height: 80px;
-	text-align: center;
-	color: white;
-	vertical-align: middle;
-	margin-top: 0;
-	display: table;
-	width: 100%;
-	> div {
-		display: table-cell;
-		vertical-align: middle;
-	}
-}
-
-.volunteers-info {
-	> .volunteers-text {
-		background-color: white;
-		text-align: center;
-		> p {
-			&:nth-child(2) {
-				color: #00838F;
-				padding-left: 30px;
-				padding-right: 30px;
-				text-align: center;
-				font-size: 24px;
-			}
-			&:nth-child(3) {
-				color: #F44336;
-				padding-left: 30px;
-				padding-right: 30px;
-				text-align: center;
-				font-size: 40px;
-				margin-top: 15px;
-				margin-bottom: 20px;
-			}
-			&:nth-child(4) {
-				color: #00838F;
-				padding-left: 30px;
-				padding-right: 30px;
-				padding-bottom: 30px;
-				text-align: center;
-				font-size: 14px;
-				width: 500px;
-				display: inline-block;
-			}
-		}
-		> div{
-			display: flex;
-			justify-content: space-between;
-  			align-items: stretch;  								
-			> div{
-				color:#fff;
-				width: 32%;		
-				padding-top: 10px;
-				padding-left: 40px;
-				padding-right: 40px;
-				padding-bottom: 40px;			
-				background-color: #00BFA5;
-				display:inline-block;
-				>h3{
-					color:#fff;
-				}		
-				> div{
-					margin-top:20px;
-					text-align: left;	
-				}			
-				
-			}
-			> div:last-child{			
-				background-color: #EF5350;	
-				> div{
-					>div{
-						width: 180px;
-						height: 180px;
-						margin: auto;
-						margin-top: 40px;
-						display:table;
-						>button{
-							  	display:table;
-								border-radius: 50%;
-								width: 150px;
-								height: 150px;
-								background-color: white;
-								border: none;
-								font-size: 28px;
-								margin: auto;
-								color: #EF5350;								
-								border: none;
-								outline:none;
-								transition: all 0.5s ease;
-						}
-						>button:hover{
-							transform: scale(1.2);
-							font-size: 30px;
-						}
-					}
-				}			
-				
-			}
-		}
-	}
-}
-
-.paymentForm{
-	margin-top: 10px;
-	>div{
-		>label{
-			display:block;
-			
-		}
-		>div{
-			padding-left:0px; 
-			padding-right:0px;
-			display:inline-block;	
-			>#sum{
-				text-align:right;
-			}	
-				
-		}
-		>#rubDiv{
-			display:table;
-			height:25px;
-			padding-left:5px;
-			>span{
-				display:table-cell;
-				vertical-align: bottom;
-			}	
-		}
-	}
-	>#commentGroup{
-		padding-right: 15px;
-	}
-	>#paymentTypes{
-		padding-top: 10px;
-		>.btn-group{
-			>label{
-				background-color:white;
-				border-color:#ccc;
-			}
-			>label.active{
-				background-color:#A7FFEB;
-			}
-		}
-	}
-	>.buttonCover{
-		width: 180px;
-		height: 180px;
+	&__background-img {
+		position: absolute;
 		margin: auto;
-		margin-top: 40px;
-		display:table;
-		>button{
-			  	display:table;
-				border-radius: 50%;
-				width: 150px;
-				height: 150px;
-				background-color: white;
-				border: none;
-				font-size: 28px;
-				margin: auto;
-				color: #EF5350;								
-				border: none;
-				outline:none;
-				transition: all 0.5s ease;
-		}
-		>button:hover{
-			transform: scale(1.2);
-			font-size: 30px;
+		min-height: 100%;
+		min-width: 100%;
+		left: -100%;
+		right: -100%;
+		top: -100%;
+		bottom: -100%;
+	}
+
+	&__container {
+		position: relative;
+		.container();
+	}
+
+	&__description {
+		.content();
+		position: absolute;
+		top: 200px;
+		margin: 0 10%;
+		z-index: 2;
+	}
+
+	&__title {
+		font-size: 40px;
+		color: #a7ffeb;;
+	}
+
+	&__text {
+		font-size: 22px;
+		color: #ddd;
+		line-height: 1.5;
+	}
+
+	&__list {
+		margin-top: 30px;
+	}
+
+	&__list-item {
+		background-color: white;
+		padding: 30px;
+		margin-bottom: 30px;
+	}
+
+	&__list-item-content {
+		line-height: 1.5;
+	}
+
+	&__list-item-content-text {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+		padding-right: 60px;
+	}
+
+	&__form {
+		width: 40%;
+		background-color: white;
+		display: inline-block;
+		color: #222;
+		padding-left: 15px;
+		border-left: 1px solid #eee;
+	}
+
+	&__form .donation {
+		&__button {
+			background-color: #ef5350;
+			color: #fff;
 		}
 	}
-}
-
-.volunteers-message {
-	margin-top:40px;
-	>.volunteers-t{
-		background-color:white;
-		padding-bottom: 20px;
-		>div{
-			display: flex;
-  			align-items: stretch;  		
-			>div{
-				padding-top: 0px;
-			    padding-right: 30px;			    
-			    margin: 30px;
-				color:@text-color;
-				width: 600px;
-			}
-			>.message-info{			
-				border-right: 1px #eee solid;
-				text-align: left;
-				display: inline-block;
-				width: 50%;
-				vertical-align: top;
-				padding-left: 30px;
-				margin-right: 0px;
-				margin-left: 10px;
-			}
-			>.message-form{
-				display: inline-block;
-				width: 45%;
-				text-align: left;
-				>form{
-					>div{
-						margin-bottom: 7px;
-						>input{
-							.form-control();
-							width:100%;
-							max-width:100%;
-							padding-left: 8px;
-							border-radius:0px;
-						}
-						>textarea{
-							.form-control();
-							width:100%;
-							max-width:100%;
-							padding-left: 8px;
-							border-radius:0px;
-						}
-						>#inputMessage{
-							height:150px;
-						}
-					}
-					>button{
-						.btn();
-						.btn-danger();
-						.pull-right();
-						border-radius: 0px;					
-	  					background-color: #EF5350;
-					}
-				}			
-			}
-		}
-	}
-}
-
-.b-widget-donate{
-	width:650px;
 }

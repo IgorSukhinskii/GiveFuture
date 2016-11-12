@@ -1,11 +1,16 @@
 @import (reference) "mixins.less";
 
 .shelters-container{
-	min-width:1170px;
-	max-width:1170px;
-	display: flex; 
-	flex-direction: row;
-	flex-wrap: wrap;
+
+	&__content {
+		.content();
+		//min-width:1170px;
+		max-width:1170px;
+		margin-top: 100px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
 }
 
 .shelter-card {

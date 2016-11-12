@@ -18,7 +18,13 @@
 </head>
 <body>
     @RenderSection("modal", required: false)
-    <div class="navigation">
+    @{
+        var isWhite = "";
+        if (ViewBag.IsWhite != null && ViewBag.IsWhite) {
+            isWhite = "navigation_white";
+        }
+    }
+    <div class="navigation @isWhite">
         <div class="navigation__logo-container">
             <a class="navigation__logo-link navigation__menu-link" href='@Url.Action("Index", "Home", new {})'>
                 <div class="navigation__logo-img-container">
